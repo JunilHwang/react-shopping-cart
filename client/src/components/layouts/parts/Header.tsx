@@ -13,7 +13,7 @@ export default function Header() {
           <Link to="/cart" className="nav-button">
             장바구니
           </Link>
-          <Link to="/orderList" className="nav-button">
+          <Link to="/order-list" className="nav-button">
             주문목록
           </Link>
         </div>
