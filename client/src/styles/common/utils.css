@@ -1,3 +1,9 @@
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: #fff;
+}
+
 .flex {
   display: flex;
 }
@@ -14,6 +20,7 @@
 .justify-end {
   justify-content: end;
 }
+
 .justify-center {
   justify-content: center;
 }
@@ -76,7 +83,7 @@
 }
 
 .w-520 {
-  width: 520;
+  width: 520px;
 }
 
 .h-144 {

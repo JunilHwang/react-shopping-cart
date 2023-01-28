@@ -1,10 +1,13 @@
 .product-container {
   display: flex;
-  justify-content: center;
-
   flex-wrap: wrap;
   gap: 20px;
-  padding: 50px 240px;
+  padding: 40px;
+}
+
+.product-item {
+  width: calc(25% - (60px / 4));
+  box-sizing: border-box;
 }
 
 .product-info {
