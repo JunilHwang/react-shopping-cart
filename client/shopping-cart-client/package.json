@@ -1,18 +1,13 @@
 {
   "name": "shopping-cart-client",
   "private": true,
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "server:prepare": "cd ../server && yarn && cd ../client",
-    "server": "cd ../server && yarn server && cd ../client",
-    "server:first": "yarn server:prepare && yarn server"
+    "preview": "vite preview"
   },
-  "type": "module",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

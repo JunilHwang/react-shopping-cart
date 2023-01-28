@@ -3,7 +3,7 @@
 > 다수의 컴포넌트를 페이지로 구성하고 복잡해진 상태를 관리합니다.
 
 ✔️ `데스크탑 타겟`의 웹 앱을 구현하며 구매로 이어지는 것에 끊김이 없고 `재방문을 고려한 UI/UX`에 대해 고민해봅니다.
-✔️ 상태 관리를 위해 `Flux Architecture` 기반의 `Redux`를 활용합니다.
+✔️ 상태관리 도구는 쓰고 싶은 것 아무거나 쓰셔도 됩니다.
 ✔️ `Router`를 활용해 여러 페이지 전환을 고려합니다.
 ✔️ [Figma](https://www.figma.com/file/m3B8Ev4BsmuVco4jIclhYf/FE_Level2_Mission3_Shopping_Cart)
 ✔️ [Github Repository](https://github.com/next-step/react-shopping-cart)
@@ -117,7 +117,6 @@
 
 - [ ] `React Testing Library` & `Jest`를 활용해 자유로운 단위의 테스트를 진행한다.
 - [ ] 사용자의 환경 개선을 위해 영속성 데이터를 관리합니다.
-- [ ] Redux 상태를 Normalize 관리합니다.
 
 #### 상품상세
 
