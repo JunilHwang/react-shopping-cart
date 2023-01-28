@@ -1,7 +1,3 @@
-/*
-  /products
-*/
-
 export interface Product {
   id: number;
   price: number;
@@ -9,7 +5,8 @@ export interface Product {
   imageUrl: string;
 }
 
-export interface GetProdutResponse extends Product {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface GetProductResponse extends Product {}
 
 export interface PostProductRequest {
   product: Omit<Product, "id">;
@@ -24,6 +21,7 @@ export interface Cart {
   product: Product;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GetCartResponse extends Cart {}
 
 export interface PostCartRequest {
@@ -43,6 +41,7 @@ export interface Order {
   orderDetails: OrderDetail[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GetOrderResponse extends Order {}
 
 export interface PostOrderResponse {
