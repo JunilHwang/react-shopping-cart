@@ -1,4 +1,4 @@
-import { ICart, IProduct } from "../types";
+import { ICart, IOrder, IProduct } from "../types";
 
 export const dummyProducts: IProduct[] = [
   {
@@ -92,5 +92,24 @@ export const dummyCarts: ICart[] = [
   {
     id: 2,
     product: { ...dummyProducts[1] },
+  },
+];
+
+export const dummyOrders: IOrder[] = [
+  {
+    id: 1,
+    orderDetails: [
+      {
+        ...dummyProducts[0],
+        id: 1,
+        quantity: 5,
+      },
+      {
+        ...dummyProducts[1],
+        imageUrl:
+          "https://cdn-mart.baemin.com/sellergoods/main/1b6e926b-52a3-4a92-8db5-fddaccdb2583.jpg",
+        quantity: 3,
+      },
+    ],
   },
 ];

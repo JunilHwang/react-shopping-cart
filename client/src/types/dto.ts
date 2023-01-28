@@ -6,9 +6,9 @@ export interface IProduct {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface GetProductResponse extends IProduct {}
+export interface IGetProductResponse extends IProduct {}
 
-export interface PostProductRequest {
+export interface IPostProductRequest {
   product: Omit<IProduct, "id">;
 }
 
@@ -22,9 +22,9 @@ export interface ICart {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface GetCartResponse extends ICart {}
+export interface IGetCartResponse extends ICart {}
 
-export interface PostCartRequest {
+export interface IPostCartRequest {
   product: IProduct;
 }
 
@@ -32,18 +32,18 @@ export interface PostCartRequest {
   /orders
 */
 
-export interface OrderDetail extends IProduct {
+export interface IOrderDetail extends IProduct {
   quantity: number;
 }
 
-export interface Order {
+export interface IOrder {
   id: number;
-  orderDetails: OrderDetail[];
+  orderDetails: IOrderDetail[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface GetOrderResponse extends Order {}
+export interface IGetOrderResponse extends IOrder {}
 
-export interface PostOrderResponse {
-  orderDetails: OrderDetail[];
+export interface IPostOrderResponse {
+  orderDetails: IOrderDetail[];
 }
