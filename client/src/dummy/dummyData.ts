@@ -1,6 +1,6 @@
-import { Product } from "../types";
+import { ICart, IProduct } from "../types";
 
-export const dummyProducts: Product[] = [
+export const dummyProducts: IProduct[] = [
   {
     id: 1,
     name: "냉면용기(대)",
@@ -81,5 +81,16 @@ export const dummyProducts: Product[] = [
     price: 21800,
     imageUrl:
       "https://cdn-mart.baemin.com/sellergoods/main/5297837f-5ecd-4945-be2f-4a75854cd06e.jpg",
+  },
+];
+
+export const dummyCarts: ICart[] = [
+  {
+    id: 1,
+    product: { ...dummyProducts[0] },
+  },
+  {
+    id: 2,
+    product: { ...dummyProducts[1] },
   },
 ];
