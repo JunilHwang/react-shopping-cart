@@ -106,8 +106,27 @@ export const dummyOrders: IOrder[] = [
       },
       {
         ...dummyProducts[1],
-        imageUrl:
-          "https://cdn-mart.baemin.com/sellergoods/main/1b6e926b-52a3-4a92-8db5-fddaccdb2583.jpg",
+        id: 2,
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    id: 2,
+    orderDetails: [
+      {
+        ...dummyProducts[2],
+        id: 3,
+        quantity: 5,
+      },
+      {
+        ...dummyProducts[3],
+        id: 4,
+        quantity: 3,
+      },
+      {
+        ...dummyProducts[4],
+        id: 5,
         quantity: 3,
       },
     ],
