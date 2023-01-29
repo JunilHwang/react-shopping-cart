@@ -5,7 +5,7 @@ export type TNormalElementProps<Element> = DetailedHTMLProps<
   Element
 >;
 
-export type TInputElementProps<Element> = DetailedHTMLProps<
+export type TInputElementProps<Element = HTMLInputElement> = DetailedHTMLProps<
   InputHTMLAttributes<Element>,
   Element
 >;

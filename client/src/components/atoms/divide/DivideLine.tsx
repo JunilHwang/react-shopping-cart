@@ -11,8 +11,6 @@ export default function DivideLine({
   className = "",
   ...props
 }: IProps) {
-  console.log(type, styles[type]);
-
   return (
     <hr
       {...props}

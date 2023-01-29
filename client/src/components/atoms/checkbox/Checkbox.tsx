@@ -1,16 +1,11 @@
 import classnames from "classnames";
-import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { TInputElementProps } from "../../../types";
 import styles from "./Checkbox.module.scss";
-
-type TInputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
 
 export default function Checkbox({
   className = "",
   ...props
-}: Omit<TInputProps, "type">) {
+}: Omit<TInputElementProps, "type">) {
   return (
     <input
       {...props}

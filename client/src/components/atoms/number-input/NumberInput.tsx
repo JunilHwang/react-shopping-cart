@@ -2,13 +2,20 @@ import { TInputElementProps } from "../../../types";
 import styles from "./NumberInput.module.scss";
 import { useNumberInput } from "./hooks";
 
-type TInputProps = TInputElementProps<HTMLInputElement>;
-
-interface IProps extends Omit<TInputProps, "onChange" | "type"> {
+interface IProps extends Omit<TInputElementProps, "onChange" | "type"> {
   onChange?: (value: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
-export default function NumberInput({ onChange, defaultValue }: IProps) {
+export default function NumberInput({
+  onChange,
+  defaultValue,
+  min = 0,
+  max = Infinity,
+  step = 1,
+}: IProps) {
   const [$inputRef, { increment, decrement }] = useNumberInput(onChange);
 
   return (
@@ -16,6 +23,9 @@ export default function NumberInput({ onChange, defaultValue }: IProps) {
       <input
         ref={$inputRef}
         type="number"
+        min={min}
+        step={step}
+        max={max}
         className={styles.numberInput}
         defaultValue={defaultValue}
       />
