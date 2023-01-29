@@ -19,7 +19,7 @@ export default function CartPage() {
 
         <div className="flex">
           <section className="cart-left-section">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between align-items-center">
               <div className="checkbox-container">
                 <input
                   className="checkbox"
@@ -31,7 +31,7 @@ export default function CartPage() {
                   선택해제
                 </label>
               </div>
-              <button className="delete-button">상품삭제</button>
+              <button className="cart-delete-button">상품삭제</button>
             </div>
             <h3 className="cart-title">든든배송 상품({dummyCarts.length}개)</h3>
 

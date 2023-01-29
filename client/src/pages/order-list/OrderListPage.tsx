@@ -33,7 +33,7 @@ export default function OrderListPage() {
                     />
                   </div>
                 </div>
-                <button className="primary-button-small flex-center self-start">
+                <button className="primary-button-small flex-center align-self-start">
                   장바구니
                 </button>
               </div>

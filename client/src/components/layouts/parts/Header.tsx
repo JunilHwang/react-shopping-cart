@@ -9,7 +9,7 @@ export default function Header() {
             <h3 className="nav-title">CLEAN CODE SHOP</h3>
           </Link>
         </div>
-        <div className="flex items-center gap-15">
+        <div className="flex align-items-center gap-15">
           <Link to="/cart" className="nav-button">
             장바구니
           </Link>
