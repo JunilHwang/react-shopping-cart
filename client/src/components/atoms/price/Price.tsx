@@ -1,5 +1,5 @@
-import { convertToNumberFormat } from "../../utils";
-import { TElementProps } from "../../types";
+import { TElementProps } from "../../../types";
+import { convertToNumberFormat } from "../../../utils";
 
 interface IProps extends TElementProps<HTMLSpanElement> {
   price: number;
