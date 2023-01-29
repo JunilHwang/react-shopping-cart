@@ -8,7 +8,7 @@ import styles from "./Product.module.scss";
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IProps extends IProduct {}
 
-export default function Product({ id, name, imageUrl, price }: IProps) {
+export default function ProductItem({ id, name, imageUrl, price }: IProps) {
   return (
     <div className={styles.productItem} key={id}>
       <img src={imageUrl} alt={name} />

@@ -1,14 +1,14 @@
-import { DefaultLayout, Product, ProductContainer } from "../../components";
+import { DefaultLayout, Product } from "../../components";
 import { dummyProducts } from "../../dummy";
 
 export default function HomePage() {
   return (
     <DefaultLayout>
-      <ProductContainer>
+      <Product.Container>
         {dummyProducts.map((product) => (
-          <Product key={product.id} {...product} />
+          <Product.Item key={product.id} {...product} />
         ))}
-      </ProductContainer>
+      </Product.Container>
     </DefaultLayout>
   );
 }
