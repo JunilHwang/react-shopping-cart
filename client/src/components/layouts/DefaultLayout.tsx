@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import styleUtils from "../../styles/modules/Utils.module.scss";
 import { Header } from "./parts";
 
 export default function DefaultLayout({ children }: PropsWithChildren) {
@@ -6,7 +7,7 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
     <>
       <Header />
 
-      <main className="container">{children}</main>
+      <main className={styleUtils.container}>{children}</main>
     </>
   );
 }
