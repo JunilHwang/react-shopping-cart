@@ -5,12 +5,8 @@ import {
   Checkbox,
   CheckboxContainer,
   DefaultLayout,
-  DivideLine,
-  NumberInput,
-  Price,
 } from "../../components";
 import { dummyCarts } from "../../dummy";
-import { ReactComponent as IconTrash } from "../../assets/svgs/trash.svg";
 import { styleUtils } from "../../styles";
 import styles from "../../components/carts/Cart.module.scss";
 
@@ -45,37 +41,11 @@ export default function CartPage() {
             title={<>든든배송 상품({dummyCarts.length}개)</>}
           >
             {dummyCarts.map(({ id, product }) => (
-              <div key={id}>
-                <div className={styles.cartContainer}>
-                  <div
-                    className={cx(
-                      styleUtils.flex,
-                      styleUtils.gap15,
-                      styleUtils.mt10
-                    )}
-                  >
-                    <Checkbox name={`cart-${id}`} />
-                    <img
-                      className={cx(styleUtils.w144, styleUtils.h144)}
-                      src={product.imageUrl}
-                      alt={product.name}
-                    />
-                    <span className={styles.cartName}>{product.name}</span>
-                  </div>
-                  <div
-                    className={cx(
-                      styleUtils.flexColCenter,
-                      styleUtils.justifyEnd,
-                      styleUtils.gap15
-                    )}
-                  >
-                    <IconTrash />
-                    <NumberInput defaultValue={1} />
-                    <Price className={styles.cartPrice} price={product.price} />
-                  </div>
-                </div>
-                <DivideLine type="thin" className={styleUtils.mt10} />
-              </div>
+              <Cart.Item
+                product={product}
+                key={id}
+                checkbox={<Checkbox name={`cart-${id}`} />}
+              />
             ))}
           </Cart.SectionLeft>
 
