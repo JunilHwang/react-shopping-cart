@@ -1,24 +1,24 @@
 .cart {
-  &-section {
+  &Section {
     padding: 24px;
 
-    &__title {
+    &Title {
       font-size: 24px;
       font-weight: 600;
     }
   }
 
-  &-delete-button {
+  &DeleteButton {
     padding: 12px 22px;
     border: 1px solid #bbbbbb;
   }
 
-  &-left-section {
+  &LeftSection {
     width: 60%;
     margin-top: 50px;
   }
 
-  &-right-section {
+  &RightSection {
     width: 35%;
     height: 260px;
     margin-left: 5%;
@@ -26,36 +26,36 @@
 
     border: 1px solid #dddddd;
 
-    &__top {
+    &Top {
       display: flex;
       align-items: center;
       padding: 16px 30px;
     }
 
-    &__bottom {
+    &Bottom {
     }
   }
 
-  &-title {
+  &Title {
     display: flex;
     align-items: center;
     font-size: 20px;
   }
 
-  &-container {
+  &Container {
     display: flex;
     justify-content: space-between;
   }
 
-  &-trash-svg {
+  &TrashSvg {
     align-self: flex-end;
   }
 
-  &-name {
+  &Name {
     font-size: 20px;
   }
 
-  &-price {
+  &Price {
     color: #333333;
     align-self: flex-end;
   }

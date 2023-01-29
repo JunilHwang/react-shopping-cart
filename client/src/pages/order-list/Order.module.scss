@@ -1,39 +1,39 @@
 .order {
 
-  &-section {
+  &Section {
     padding: 24px;
 
-    &__title {
+    &Title {
       font-size: 24px;
       font-weight: 600;
     }
   }
 
-  &-container {
+  &Container {
     display: flex;
     justify-content: space-between;
   }
 
-  &-title {
+  &Title {
     display: flex;
     align-items: center;
     font-size: 20px;
   }
 
-  &-name {
+  &Name {
     font-size: 20px;
   }
 
-  &-info {
+  &Info {
     color: #888888;
   }
 
-  &-left-section {
+  &LeftSection {
     width: 60%;
     margin-top: 50px;
   }
 
-  &-right-section {
+  &RightSection {
     width: 35%;
     height: 260px;
     margin-left: 5%;
@@ -41,23 +41,23 @@
 
     border: 1px solid #dddddd;
 
-    &__top {
+    &Top {
       display: flex;
       align-items: center;
       padding: 16px 30px;
     }
 
-    &__bottom {
+    &Bottom {
     }
   }
 
-  &-list {
+  &List {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    &__header {
+    &Header {
       width: 100%;
       padding: 30px 50px;
       display: flex;
@@ -70,7 +70,7 @@
       border: 1px solid #aaaaaa;
     }
 
-    &-item {
+    &Item {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -81,14 +81,14 @@
     }
   }
 
-  &-detail {
-    &-container {
+  &Detail {
+    &Container {
       display: flex;
       justify-content: flex-end;
       margin: 50px 0;
     }
 
-    &-title {
+    &Title {
       font-size: 24px;
     }
   }

@@ -1,0 +1,202 @@
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.flex {
+  display: flex;
+
+  &Col {
+    display: flex;
+    flex-direction: column;
+
+    &Center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &Center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.justify {
+  &Start {
+    justify-content: start;
+  }
+
+  &End {
+    justify-content: end;
+  }
+
+  &Center {
+    justify-content: center;
+  }
+
+  &Between {
+    justify-content: space-between;
+  }
+
+  &Around {
+    justify-content: space-around;
+  }
+
+  &Evenly {
+    justify-content: space-evenly;
+  }
+}
+
+.align {
+  &ItemsCenter {
+    align-items: center;
+  }
+
+  &SelfStart {
+    align-self: flex-start;
+  }
+}
+
+.gap {
+  &5 {
+    gap: 5px;
+  }
+
+  &10 {
+    gap: 10px;
+  }
+
+  &15 {
+    gap: 15px;
+  }
+}
+
+.w {
+  &144 {
+    width: 144px;
+  }
+
+  &280 {
+    width: 280px;
+  }
+
+  &480 {
+    width: 480px;
+  }
+
+  &520 {
+    width: 520px;
+  }
+}
+
+.h {
+  &144 {
+    height: 144px;
+  }
+
+  &280 {
+    height: 280px;
+  }
+
+  &480 {
+    height: 480px;
+  }
+
+  &520 {
+    height: 520px;
+  }
+}
+
+.p {
+  &5 {
+    padding: 5px;
+  }
+
+  &10 {
+    padding: 10px;
+  }
+
+  &20 {
+    padding: 20px;
+  }
+
+  &x {
+    &10 {
+      padding: 10px 0;
+    }
+
+    &20 {
+      padding: 20px 0;
+    }
+  }
+
+  &y {
+    &10 {
+      padding: 0 10px;
+    }
+
+    &20 {
+      padding: 0 20px;
+    }
+  }
+}
+
+.m {
+  &t {
+    &10 {
+      margin-top: 10px;
+    }
+
+    &20 {
+      margin-top: 20px;
+    }
+
+    &30 {
+      margin-top: 30px;
+    }
+
+    &40 {
+      margin-top: 40px;
+    }
+  }
+
+  &b {
+    &10 {
+      margin-bottom: 10px;
+    }
+
+    &20 {
+      margin-bottom: 20px;
+    }
+  }
+
+  &y {
+    &10 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    &20 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &x {
+    &10 {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    &20 {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+  }
+}

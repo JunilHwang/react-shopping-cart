@@ -1,50 +1,50 @@
 .product {
 
-  &-container {
+  &Container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 40px;
   }
 
-  &-item {
+  &Item {
     width: calc(25% - (60px / 4));
     box-sizing: border-box;
   }
 
-  &-info {
+  &Info {
     display: flex;
     flex-direction: column;
 
-    &__name {
+    &Name {
       font-size: 12px;
     }
 
-    &__price {
+    &Price {
     }
   }
 
-  &-detail {
-    &-container {
+  &Detail {
+    &Container {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 50px;
     }
 
-    &-info {
+    &Info {
       width: 100%;
     }
 
-    &-info__name {
+    &Info--name {
       font-size: 24px;
     }
 
-    &-info__price {
+    &Info--price {
       font-size: 24px;
     }
 
-    &-button {
+    &Button {
       width: 100%;
       padding: 24px;
       background: #73675c;
