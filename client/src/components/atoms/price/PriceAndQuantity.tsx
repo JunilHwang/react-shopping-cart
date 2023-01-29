@@ -1,7 +1,7 @@
-import { TElementProps } from "../../../types";
+import { TNormalElementProps } from "../../../types";
 import { convertToNumberFormat } from "../../../utils";
 
-interface IProps extends TElementProps<HTMLSpanElement> {
+interface IProps extends TNormalElementProps<HTMLSpanElement> {
   price: number;
   quantity: number;
 }

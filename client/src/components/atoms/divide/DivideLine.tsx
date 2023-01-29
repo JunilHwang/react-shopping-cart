@@ -1,8 +1,8 @@
 import classnames from "classnames";
-import { TElementProps } from "../../../types";
+import { TNormalElementProps } from "../../../types";
 import styles from "./DivideLine.module.scss";
 
-interface IProps extends TElementProps<HTMLHRElement> {
+interface IProps extends TNormalElementProps<HTMLHRElement> {
   type?: "black" | "gray" | "thin";
 }
 

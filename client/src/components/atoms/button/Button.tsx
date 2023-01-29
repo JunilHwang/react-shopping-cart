@@ -1,9 +1,9 @@
 import classnames from "classnames";
 import { PropsWithChildren } from "react";
-import { TElementProps } from "../../../types";
+import { TNormalElementProps } from "../../../types";
 import styles from "./Button.module.scss";
 
-interface IProps extends Omit<TElementProps<HTMLButtonElement>, "type"> {
+interface IProps extends Omit<TNormalElementProps<HTMLButtonElement>, "type"> {
   nativeType?: "button" | "submit" | "reset";
   type?: "primary" | "secondary";
   size?: "small" | "full";

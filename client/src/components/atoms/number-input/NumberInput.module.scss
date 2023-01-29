@@ -1,4 +1,4 @@
-.number-input {
+.numberInput {
   width: 72px;
   height: 58px;
   border: 1px solid #dddddd;
@@ -6,13 +6,13 @@
   font-size: 24px;
 
 
-  &-container {
+  &Container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &-button {
+  &Button {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,10 +1,10 @@
 import { ComponentProps, ReactNode } from "react";
 import classnames from "classnames";
-import { TElementProps } from "../../../types";
+import { TNormalElementProps } from "../../../types";
 import Checkbox from "./Checkbox";
 import styles from "./Checkbox.module.scss";
 
-interface IProps extends TElementProps<HTMLDivElement> {
+interface IProps extends TNormalElementProps<HTMLDivElement> {
   checkbox: ComponentProps<typeof Checkbox>;
   label: ReactNode;
 }
