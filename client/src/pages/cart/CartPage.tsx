@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { DefaultLayout } from "../../components";
+import { DefaultLayout, Price } from "../../components";
 import { dummyCarts } from "../../dummy";
 import { ReactComponent as IconTrash } from "../../assets/svgs/trash.svg";
 
@@ -63,7 +63,7 @@ export default function CartPage() {
                         <button className="number-input-button">▼</button>
                       </div>
                     </div>
-                    <span className="cart-price">{product.price}</span>
+                    <Price className="cart-price" price={product.price} />
                   </div>
                 </div>
                 <hr className="divide-line-thin mt-10" />
@@ -79,7 +79,7 @@ export default function CartPage() {
             <div className="cart-right-section__bottom">
               <div className="flex justify-between p-20 mt-20">
                 <span className="highlight-text">결제예상금액</span>
-                <span className="highlight-text">{totalPrice}</span>
+                <Price className="highlight-text" price={totalPrice} />
               </div>
               <div className="flex-center mt-30 mx-10">
                 <button className="primary-button flex-center">

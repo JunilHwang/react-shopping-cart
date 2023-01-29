@@ -1,4 +1,4 @@
-import { DefaultLayout } from "../../components";
+import { DefaultLayout, PriceAndQuantity } from "../../components";
 import { dummyOrders } from "../../dummy";
 
 export default function OrderListPage() {
@@ -26,9 +26,11 @@ export default function OrderListPage() {
                   />
                   <div className="flex-col gap-15">
                     <span className="order-name">{orderDetail.name}</span>
-                    <span className="order-info">
-                      {orderDetail.price} / 수량: {orderDetail.quantity}개
-                    </span>
+                    <PriceAndQuantity
+                      className="order-info"
+                      price={orderDetail.price}
+                      quantity={orderDetail.quantity}
+                    />
                   </div>
                 </div>
                 <button className="primary-button-small flex-center self-start">
