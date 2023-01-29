@@ -1,0 +1,15 @@
+.divideLine {
+  width: 100%;
+
+  &.black {
+    border: 2px solid black;
+  }
+
+  &.gray {
+    border: 2px solid #aaaaaa;
+  }
+
+  &.thin {
+    border: 1px solid #aaaaaa;
+  }
+}

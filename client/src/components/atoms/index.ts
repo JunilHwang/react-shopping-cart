@@ -1,2 +1,4 @@
-export { default as Price } from "./Price";
-export { default as PriceAndQuantity } from "./PriceAndQuantity";
+export * from "./price";
+export * from "./button";
+export * from "./checkbox";
+export * from "./divide";

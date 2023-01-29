@@ -1,0 +1,18 @@
+.button {
+  color: white;
+
+  &.primary {
+    background: #2ac1bc;
+  }
+  
+  &.full {
+    width: 100%;
+    font-size: 24px;
+    padding: 20px;
+  }
+
+  &.small {
+    font-size: 20px;
+    padding: 14px 28px;
+  }
+}

@@ -5,7 +5,7 @@
   width: 1.75rem;
   height: 1.75rem;
   cursor: pointer;
-  
+
   &:focus {
     outline: none;
   }
@@ -25,12 +25,12 @@
     align-items: center;
   }
 
-  &-container {
+  &Container {
     display: flex;
     align-items: center;
   }
 
-  &-label {
+  &Label {
     padding-left: 7px;
   }
 
