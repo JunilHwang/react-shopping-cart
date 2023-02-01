@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import cx from "classnames";
+import { useQuery } from "react-query";
 import {
   Button,
   Cart,
@@ -8,13 +9,17 @@ import {
   DefaultLayout,
   PageHeader,
 } from "../../components";
-import { dummyCarts } from "../../dummy";
 import { styleUtils } from "../../styles";
+import { cartService } from "../../services";
 
 export default function CartPage() {
+  const { data: carts = [] } = useQuery("carts", () =>
+    cartService.fetchCarts()
+  );
+
   const totalPrice = useMemo(
-    () => dummyCarts.reduce((total, { product }) => total + product.price, 0),
-    []
+    () => carts.reduce((total, { product }) => total + product.price, 0),
+    [carts]
   );
 
   return (
@@ -41,9 +46,9 @@ export default function CartPage() {
                 </Button>
               </div>
             }
-            title={<>든든배송 상품({dummyCarts.length}개)</>}
+            title={<>든든배송 상품({carts.length}개)</>}
           >
-            {dummyCarts.map(({ id, product }) => (
+            {carts.map(({ id, product }) => (
               <Cart.Item
                 product={product}
                 key={id}
@@ -54,7 +59,7 @@ export default function CartPage() {
 
           <Cart.SectionRight
             title="결제예상금액"
-            buttonLabel={<>주문하기({dummyCarts.length}개)</>}
+            buttonLabel={<>주문하기({carts.length}개)</>}
           >
             <Cart.TotalPrice label="결제예상금액" value={totalPrice} />
           </Cart.SectionRight>
