@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import styleUtils from "../../../../styles/modules/Utils.module.scss";
+import styleUtils from "../../../../styles/Utils.module.scss";
 import styles from "./Header.module.scss";
 
 export default function Header() {

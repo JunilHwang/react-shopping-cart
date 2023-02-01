@@ -1,1 +1,1 @@
-export { default as styleUtils } from "./modules/Utils.module.scss";
+export { default as styleUtils } from "./Utils.module.scss";
