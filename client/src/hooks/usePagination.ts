@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import limitRangeNumber from "../utils/limitRangeNumber";
 
 interface IProps<T> {
   items?: T[];
@@ -8,7 +9,7 @@ interface IProps<T> {
 export function usePagination<T>({ items, size }: IProps<T>) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageItems = useMemo(
-    () => items?.slice(0, currentPage * size) || [],
+    () => items?.slice(0, currentPage * size),
     [items, currentPage, size]
   );
   const lastPage = useMemo(
@@ -16,12 +17,13 @@ export function usePagination<T>({ items, size }: IProps<T>) {
     [items?.length, size]
   );
 
-  const nextPage = useMemo(
-    () => Math.min(currentPage + 1, lastPage),
-    [currentPage, lastPage]
+  const goToNextPage = useCallback(
+    () =>
+      setCurrentPage((currentPage) =>
+        limitRangeNumber(currentPage + 1, 1, lastPage)
+      ),
+    [lastPage]
   );
-
-  const goToNextPage = useCallback(() => setCurrentPage(nextPage), [nextPage]);
 
   return {
     currentPage,

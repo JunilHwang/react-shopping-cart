@@ -3,5 +3,5 @@ export default function limitRangeNumber(
   min = -Infinity,
   max = Infinity
 ) {
-  return Math.min(max, Math.max(min, value));
+  return Math.max(min, Math.min(max, value));
 }

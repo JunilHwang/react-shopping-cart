@@ -13,7 +13,7 @@ export default function HomePage() {
   );
 
   const { pageItems, goToNextPage } = usePagination({
-    items: products || [],
+    items: products,
     size: PAGE_SIZE,
   });
   const $bottomRef = useInfiniteScroll(goToNextPage);
@@ -24,7 +24,7 @@ export default function HomePage() {
         {isLoading ? (
           <Product.Skeleton count={PAGE_SIZE} />
         ) : (
-          pageItems.map((product) => (
+          pageItems?.map((product) => (
             <Product.Item key={product.id} {...product} />
           ))
         )}

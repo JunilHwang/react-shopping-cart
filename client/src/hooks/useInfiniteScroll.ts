@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useInView } from "./useInView";
 
 export function useInfiniteScroll(callback: () => void) {
-  const [ref, { inView }] = useInView({ threshold: 1, rootMargin: "50px" });
+  const [ref, { inView }] = useInView();
 
   useEffect(() => {
     if (inView) {
