@@ -5,8 +5,8 @@ import styles from "./Button.module.scss";
 
 interface IProps extends Omit<TNormalElementProps<HTMLButtonElement>, "type"> {
   nativeType?: "button" | "submit" | "reset";
-  type?: "primary" | "secondary";
-  size?: "small" | "full";
+  type?: "primary" | "normal";
+  size?: "mini" | "small" | "full";
 }
 
 export default function Button({

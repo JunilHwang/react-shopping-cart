@@ -1,14 +1,15 @@
 import { useMemo } from "react";
 import cx from "classnames";
 import {
+  Button,
   Cart,
   Checkbox,
   CheckboxContainer,
   DefaultLayout,
+  PageHeader,
 } from "../../components";
 import { dummyCarts } from "../../dummy";
 import { styleUtils } from "../../styles";
-import styles from "../../components/carts/Cart.module.scss";
 
 export default function CartPage() {
   const totalPrice = useMemo(
@@ -19,7 +20,7 @@ export default function CartPage() {
   return (
     <DefaultLayout>
       <Cart.Container>
-        <Cart.Header>장바구니</Cart.Header>
+        <PageHeader>장바구니</PageHeader>
 
         <Cart.SectionWrapper>
           <Cart.SectionLeft
@@ -35,7 +36,9 @@ export default function CartPage() {
                   checkbox={{ name: "checkbox" }}
                   label="선택해제"
                 />
-                <button className={styles.cartDeleteButton}>상품삭제</button>
+                <Button type="normal" size="mini">
+                  상품삭제
+                </Button>
               </div>
             }
             title={<>든든배송 상품({dummyCarts.length}개)</>}

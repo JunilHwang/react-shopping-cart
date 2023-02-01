@@ -1,10 +1,10 @@
 .button {
-  color: white;
 
   &.primary {
     background: #2ac1bc;
+    color: white;
   }
-  
+
   &.full {
     width: 100%;
     font-size: 24px;
@@ -14,5 +14,14 @@
   &.small {
     font-size: 20px;
     padding: 14px 28px;
+  }
+
+  &.mini {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  &.normal {
+    border: 1px solid #bbbbbb;
   }
 }
