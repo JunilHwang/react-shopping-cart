@@ -5,12 +5,9 @@ import { IProduct } from "../../types";
 import { IconCart } from "../../assets/svgs";
 import styles from "./Product.module.scss";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IProps extends IProduct {}
-
-export default function ProductItem({ id, name, imageUrl, price }: IProps) {
+export default function ProductItem({ name, imageUrl, price }: IProduct) {
   return (
-    <div className={styles.productItem} key={id}>
+    <div className={styles.productItem}>
       <img src={imageUrl} alt={name} />
 
       <div

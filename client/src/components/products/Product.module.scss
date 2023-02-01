@@ -12,6 +12,23 @@
     box-sizing: border-box;
   }
 
+  &Skeleton {
+    width: calc(25% - (60px / 4));
+    box-sizing: border-box;
+    $color: #EEE;
+
+    &Thumbnail {
+      padding-top: 100%;
+      background-color: $color;
+    }
+
+    &Info {
+      background-color: rgba($color, 0.5);
+      margin-top: 5px;
+      height: 39px;
+    }
+  }
+
   &Info {
     display: flex;
     flex-direction: column;
