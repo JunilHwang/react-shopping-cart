@@ -52,8 +52,8 @@
 
 ### 필수 요구사항
 
-- [ ] `React Testing Library` & `Jest`를 활용해 자유로운 단위의 테스트를 진행한다.
-- [ ] `Redux` 상태와 `Hooks`를 조합할 수 있는 패턴과 구조를 시도한다.
+- [X] `React Testing Library` & `Jest`를 활용해 자유로운 단위의 테스트를 진행한다.
+- [ ] 전역 상태관리를 다루는 `Custom Hooks`를 조합할 수 있는 패턴과 구조를 시도한다.
 
 #### 장바구니
 

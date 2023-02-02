@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import cx from "classnames";
-import { useQuery } from "react-query";
 import {
   Button,
   Cart,
@@ -10,12 +9,10 @@ import {
   PageHeader,
 } from "../../components";
 import { styleUtils } from "../../styles";
-import { cartService } from "../../services";
+import { useCarts } from "../../store";
 
 export default function CartPage() {
-  const { data: carts = [] } = useQuery("carts", () =>
-    cartService.fetchCarts()
-  );
+  const { carts } = useCarts();
 
   const totalPrice = useMemo(
     () => carts.reduce((total, { product }) => total + product.price, 0),

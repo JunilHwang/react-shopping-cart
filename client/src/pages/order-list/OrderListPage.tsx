@@ -1,9 +1,9 @@
-import { useQuery } from "react-query";
 import { DefaultLayout, Order, PageHeader } from "../../components";
-import { orderService } from "../../services";
+import { useOrders } from "../../store";
 
 export default function OrderListPage() {
-  const { data: orders } = useQuery("orders", () => orderService.fetchOrders());
+  const { orders } = useOrders();
+
   return (
     <DefaultLayout>
       <Order.Section>

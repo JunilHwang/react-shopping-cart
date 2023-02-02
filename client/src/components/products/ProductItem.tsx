@@ -1,11 +1,30 @@
 import cx from "classnames";
+import { MouseEventHandler, useCallback } from "react";
 import { styleUtils } from "../../styles";
-import { Price } from "../atoms";
+import { IconButton, Price } from "../atoms";
 import { IProduct } from "../../types";
 import { IconCart } from "../../assets/svgs";
 import styles from "./Product.module.scss";
 
-export default function ProductItem({ name, imageUrl, price }: IProduct) {
+interface IProps extends IProduct {
+  onClickCart?: (id: IProduct["id"]) => void;
+}
+
+export default function ProductItem({
+  id,
+  name,
+  imageUrl,
+  price,
+  onClickCart,
+}: IProps) {
+  const handeClickCartIcon: MouseEventHandler<HTMLButtonElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+      onClickCart?.(id);
+    },
+    [id, onClickCart]
+  );
+
   return (
     <div className={styles.productItem}>
       <img src={imageUrl} alt={name} />
@@ -21,7 +40,8 @@ export default function ProductItem({ name, imageUrl, price }: IProduct) {
           <span className={styles.productInfoName}>{name}</span>
           <Price className={styles.productInfoPrice} price={price} />
         </div>
-        <IconCart />
+
+        <IconButton icon={<IconCart />} onClick={handeClickCartIcon} />
       </div>
     </div>
   );
