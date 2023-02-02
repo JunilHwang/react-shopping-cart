@@ -1,12 +1,13 @@
 import { useCallback } from "react";
 import { DefaultLayout, Product } from "../../components";
 import { useInfiniteScroll, usePagination } from "../../hooks";
-import { useProducts } from "../../store";
+import { useCartsActions, useProducts } from "../../store";
 
 const PAGE_SIZE = 12;
 
 export default function HomePage() {
   const { isLoading, products } = useProducts();
+  const { addCart } = useCartsActions();
 
   const { pageItems, goToNextPage } = usePagination({
     items: products,
@@ -14,7 +15,15 @@ export default function HomePage() {
   });
   const $bottomRef = useInfiniteScroll(goToNextPage);
 
-  const addCart = useCallback((id: number) => {}, []);
+  const handleClickCart = useCallback(
+    (id: number) => {
+      const product = pageItems?.find((product) => product.id === id);
+      if (product) {
+        addCart(product);
+      }
+    },
+    [addCart, pageItems]
+  );
 
   return (
     <DefaultLayout>
@@ -23,7 +32,11 @@ export default function HomePage() {
           <Product.Skeleton count={PAGE_SIZE} />
         ) : (
           pageItems?.map((product) => (
-            <Product.Item key={product.id} {...product} onClickCart={addCart} />
+            <Product.Item
+              key={product.id}
+              {...product}
+              onClickCart={handleClickCart}
+            />
           ))
         )}
       </Product.Container>

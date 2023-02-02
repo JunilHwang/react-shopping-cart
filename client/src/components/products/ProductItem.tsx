@@ -7,7 +7,7 @@ import { IconCart } from "../../assets/svgs";
 import styles from "./Product.module.scss";
 
 interface IProps extends IProduct {
-  onClickCart?: (id: IProduct["id"]) => void;
+  onClickCart?: (id: number) => void;
 }
 
 export default function ProductItem({
