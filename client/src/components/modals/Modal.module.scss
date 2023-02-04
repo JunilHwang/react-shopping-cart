@@ -1,0 +1,33 @@
+.modal {
+  background: rgba(#000, 0.5);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0;
+
+    + * {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: left;
+    }
+  }
+
+  &Container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  &Title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}

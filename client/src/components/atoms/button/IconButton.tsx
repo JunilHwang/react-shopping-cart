@@ -1,11 +1,9 @@
 import { ReactNode } from "react";
 import cx from "classnames";
-import { TNormalElementProps } from "../../../types";
+import { TButtonElementProps } from "../../../types";
 import styles from "./Button.module.scss";
 
-type TButtonProps = TNormalElementProps<HTMLButtonElement>;
-
-interface IProps extends TButtonProps {
+interface IProps extends TButtonElementProps {
   icon: ReactNode;
 }
 

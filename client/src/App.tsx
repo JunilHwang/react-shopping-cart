@@ -3,6 +3,7 @@ import { Provider } from "jotai";
 import { QueryClientProvider } from "react-query";
 import { router } from "./router";
 import { queryClient } from "./store";
+import { Modal } from "./components";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Provider>
           <RouterProvider router={router} />
+          <Modal.Portal />
         </Provider>
       </QueryClientProvider>
     </div>

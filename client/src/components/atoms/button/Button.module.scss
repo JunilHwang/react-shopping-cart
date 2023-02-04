@@ -1,4 +1,6 @@
 .button {
+  cursor: pointer;
+  transition: 0.3s;
 
   &.primary {
     background: #2ac1bc;
@@ -22,7 +24,12 @@
   }
 
   &.normal {
-    border: 1px solid #bbbbbb;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #bbbbbb;
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 }
 
