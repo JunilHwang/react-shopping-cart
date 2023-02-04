@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAtom } from "jotai";
 import { cartQuantityMapAtom } from "../globalStore";
 import { ICart } from "../../../types";
@@ -13,7 +13,20 @@ export function useCartQuantity(carts: ICart[]) {
         return acc;
       }, {} as Record<string, number>)
     );
-  }, [carts, quantityMap, setQuantityMap]);
 
-  return [quantityMap, setQuantityMap] as const;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carts]);
+
+  const changeQuantity = useCallback((id: number, quantity: number) => {
+    setQuantityMap((map) => ({
+      ...map,
+      [id]: quantity,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return {
+    quantityMap,
+    changeQuantity,
+  };
 }

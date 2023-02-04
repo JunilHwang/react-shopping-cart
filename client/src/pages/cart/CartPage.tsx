@@ -36,7 +36,7 @@ const convertIdsToBooleanMap = (
 export default function CartPage() {
   const { carts, refetchCarts } = useCarts();
   const { deleteCarts, deletedCarts } = useCartsDelete();
-  const [quantityMap, setQuantityMap] = useCartQuantity(carts);
+  const { quantityMap, changeQuantity } = useCartQuantity(carts);
   const [checkedIds, setCheckedIds] = useAtom(cartCheckedIdsAtom);
   const setOrderDetails = useOrderDetails(checkedIds, quantityMap);
   const checkedDeleteConfirm = useModalConfirm();
@@ -103,16 +103,6 @@ export default function CartPage() {
       }
     });
   }, [allChecked, carts, setCheckedIds]);
-
-  const changeQuantity = useCallback(
-    (id: number, quantity: number) => {
-      setQuantityMap((map) => ({
-        ...map,
-        [id]: quantity,
-      }));
-    },
-    [setQuantityMap]
-  );
 
   const deleteCheckedCarts = useCallback(() => {
     deleteCarts(checkedIds);
