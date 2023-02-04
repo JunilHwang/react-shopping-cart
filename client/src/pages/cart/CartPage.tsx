@@ -57,6 +57,11 @@ export default function CartPage() {
     [carts.length, checkedIds.length]
   );
 
+  const noneChecked = useMemo(
+    () => checkedIds.length === 0,
+    [checkedIds.length]
+  );
+
   const toggleChecked = useCallback((targetId: number) => {
     setCheckedIds((ids) => {
       if (ids.includes(targetId)) {
@@ -95,6 +100,14 @@ export default function CartPage() {
       checkedDeleteConfirm.close();
     },
     [checkedDeleteConfirm, deleteCarts]
+  );
+
+  const totalQuantity = useMemo(
+    () =>
+      Object.keys(quantityMap)
+        .filter((id) => checkedMap[id])
+        .reduce((acc, id) => acc + quantityMap[id], 0),
+    [checkedMap, quantityMap]
   );
 
   useEffect(() => {
@@ -142,7 +155,7 @@ export default function CartPage() {
                 <Button
                   type="normal"
                   size="mini"
-                  disabled={checkedIds.length === 0}
+                  disabled={noneChecked}
                   onClick={checkedDeleteConfirm.open}
                 >
                   상품삭제
@@ -156,7 +169,7 @@ export default function CartPage() {
                 />
               </div>
             }
-            title={<>든든배송 상품({carts.length}개)</>}
+            title={<>든든배송 상품({checkedIds.length}개)</>}
           >
             {carts.map(({ id, product }) => (
               <>
@@ -180,7 +193,8 @@ export default function CartPage() {
 
           <Cart.SectionRight
             title="결제예상금액"
-            buttonLabel={<>주문하기({carts.length}개)</>}
+            buttonLabel={<>주문하기({totalQuantity}개)</>}
+            disabled={noneChecked}
           >
             <Cart.TotalPrice label="결제예상금액" value={totalPrice} />
           </Cart.SectionRight>

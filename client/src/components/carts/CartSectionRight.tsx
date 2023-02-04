@@ -8,12 +8,14 @@ import CartTitle from "./CartTitle";
 interface IProps {
   title: ReactNode;
   buttonLabel: ReactNode;
+  disabled?: boolean;
 }
 
 export default function CartSectionRight({
   children,
   title,
   buttonLabel,
+  disabled,
 }: PropsWithChildren<IProps>) {
   return (
     <section className={styles.cartRightSection}>
@@ -32,7 +34,12 @@ export default function CartSectionRight({
             styleUtils.mx10
           )}
         >
-          <Button type="primary" size="full" className={styleUtils.flexCenter}>
+          <Button
+            type="primary"
+            size="full"
+            className={styleUtils.flexCenter}
+            disabled={disabled}
+          >
             {buttonLabel}
           </Button>
         </div>
