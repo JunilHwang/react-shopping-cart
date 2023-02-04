@@ -18,7 +18,7 @@ import {
   useCartQuantity,
   useCarts,
   useCartsDelete,
-  useOrderDetails,
+  useGenerateOrderDetails,
 } from "../../store";
 
 const convertIdsToBooleanMap = (
@@ -38,7 +38,7 @@ export default function CartPage() {
   const { deleteCarts, deletedCarts } = useCartsDelete();
   const { quantityMap, changeQuantity } = useCartQuantity(carts);
   const [checkedIds, setCheckedIds] = useAtom(cartCheckedIdsAtom);
-  const setOrderDetails = useOrderDetails(checkedIds, quantityMap);
+  const generateOrderDetails = useGenerateOrderDetails(checkedIds, quantityMap);
   const checkedDeleteConfirm = useModalConfirm();
   const orderConfirm = useModalConfirm();
   const navigate = useNavigate();
@@ -118,9 +118,9 @@ export default function CartPage() {
   );
 
   const orderSelectedCarts = useCallback(() => {
-    setOrderDetails(carts);
+    generateOrderDetails(carts);
     navigate("/order");
-  }, [carts, navigate, setOrderDetails]);
+  }, [carts, navigate, generateOrderDetails]);
 
   useEffect(() => {
     if (deletedCarts) {

@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Cart,
@@ -11,31 +11,17 @@ import {
 } from "../../components";
 import {
   cartCheckedIdsAtom,
-  orderDetailsAtom,
   useCartsDelete,
   useOrderAdd,
+  useOrderDetails,
 } from "../../store";
 
 export default function OrderPage() {
-  const [orderDetails] = useAtom(orderDetailsAtom);
+  const { orderDetails, totalQuantity, totalPrice } = useOrderDetails();
   const [checkedIds] = useAtom(cartCheckedIdsAtom);
   const { addOrder, addedOrder } = useOrderAdd();
   const { deleteCarts } = useCartsDelete();
   const navigate = useNavigate();
-
-  const totalQuantity = useMemo(
-    () => orderDetails.reduce((acc, { quantity }) => acc + quantity, 0),
-    [orderDetails]
-  );
-
-  const totalPrice = useMemo(
-    () =>
-      orderDetails.reduce(
-        (acc, { price, quantity }) => acc + price * quantity,
-        0
-      ),
-    [orderDetails]
-  );
 
   const orderConfirm = useModalConfirm();
 
@@ -61,9 +47,7 @@ export default function OrderPage() {
         <Cart.SectionWrapper>
           <Cart.SectionLeft title={<>주문 상품({orderDetails.length}건)</>}>
             {orderDetails.map((orderDetail) => (
-              <>
-                <Order.DetailItem key={orderDetail.id} {...orderDetail} />
-              </>
+              <Order.DetailItem key={orderDetail.id} {...orderDetail} />
             ))}
           </Cart.SectionLeft>
 

@@ -1,10 +1,10 @@
 import { useAtom } from "jotai/index";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { orderDetailsAtom } from "../globalStore";
 import { cartsToOrderDetails } from "../../../domain";
 import { ICart } from "../../../types";
 
-export function useOrderDetails(
+export function useGenerateOrderDetails(
   checkedIds: number[],
   quantityMap: Record<string, number>
 ) {
@@ -21,4 +21,28 @@ export function useOrderDetails(
     },
     [checkedIds, quantityMap, setOrderDetails]
   );
+}
+
+export function useOrderDetails() {
+  const [orderDetails] = useAtom(orderDetailsAtom);
+
+  const totalQuantity = useMemo(
+    () => orderDetails.reduce((acc, { quantity }) => acc + quantity, 0),
+    [orderDetails]
+  );
+
+  const totalPrice = useMemo(
+    () =>
+      orderDetails.reduce(
+        (acc, { price, quantity }) => acc + price * quantity,
+        0
+      ),
+    [orderDetails]
+  );
+
+  return {
+    orderDetails,
+    totalQuantity,
+    totalPrice,
+  };
 }
