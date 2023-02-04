@@ -4,21 +4,35 @@ import { cartService } from "../../services";
 const QUERY_KEY = "carts";
 
 export function useCarts() {
-  const { isLoading, data: carts = [] } = useQuery(QUERY_KEY, () =>
-    cartService.fetchCarts()
-  );
+  const {
+    isLoading,
+    data: carts = [],
+    refetch: refetchCarts,
+  } = useQuery(QUERY_KEY, () => cartService.fetchCarts());
 
-  return { isLoading, carts };
+  return { isLoading, carts, refetchCarts };
 }
 
-export function useCartsActions() {
-  const { mutate: addCart, isSuccess: cartAdded } = useMutation(
+export function useCartAdd() {
+  const { mutate: addCart, isSuccess: addedCart } = useMutation(
     QUERY_KEY,
     cartService.addCart
   );
 
   return {
     addCart,
-    cartAdded,
+    addedCart,
+  };
+}
+
+export function useCartsDelete() {
+  const { mutate: deleteCarts, isSuccess: deletedCarts } = useMutation(
+    QUERY_KEY,
+    cartService.deleteCarts
+  );
+
+  return {
+    deleteCarts,
+    deletedCarts,
   };
 }

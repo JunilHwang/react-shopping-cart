@@ -2,13 +2,13 @@ import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DefaultLayout, Product } from "../../components";
 import { useInfiniteScroll, usePagination } from "../../hooks";
-import { useCartsActions, useProducts } from "../../store";
+import { useCartAdd, useProducts } from "../../store";
 
 const PAGE_SIZE = 12;
 
 export default function HomePage() {
   const { isLoading, products } = useProducts();
-  const { addCart, cartAdded } = useCartsActions();
+  const { addCart, addedCart } = useCartAdd();
   const navigate = useNavigate();
 
   const { pageItems, goToNextPage } = usePagination({
@@ -28,10 +28,10 @@ export default function HomePage() {
   );
 
   useEffect(() => {
-    if (cartAdded) {
+    if (addedCart) {
       navigate("/cart");
     }
-  }, [cartAdded, navigate]);
+  }, [addedCart, navigate]);
 
   return (
     <DefaultLayout>

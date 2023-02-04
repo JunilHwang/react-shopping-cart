@@ -1,10 +1,11 @@
 import cx from "classnames";
 import { ReactNode, useMemo } from "react";
 import { styleUtils } from "../../styles";
-import { DivideLine, NumberInput, Price } from "../atoms";
+import { DivideLine, IconButton, NumberInput, Price } from "../atoms";
 import { IProduct } from "../../types";
 import { IconTrash } from "../../assets/svgs";
 import { CartQuantity } from "../../domain";
+import { Modal, useModalConfirm } from "../modals";
 import styles from "./Cart.module.scss";
 
 interface IProps {
@@ -12,6 +13,7 @@ interface IProps {
   product: IProduct;
   quantity: number;
   onChangeQuantity?: (quantity: number) => void;
+  onDelete?: () => void;
 }
 
 export default function CartItem({
@@ -19,7 +21,9 @@ export default function CartItem({
   product,
   quantity,
   onChangeQuantity,
+  onDelete,
 }: IProps) {
+  const confirmModal = useModalConfirm();
   const checkboxIfExists = useMemo(
     () =>
       checkbox && (
@@ -52,7 +56,7 @@ export default function CartItem({
               styleUtils.gap15
             )}
           >
-            <IconTrash />
+            <IconButton icon={<IconTrash />} onClick={confirmModal.open} />
             <NumberInput
               defaultValue={CartQuantity.MIN}
               min={CartQuantity.MIN}
@@ -67,6 +71,13 @@ export default function CartItem({
         </div>
       </div>
       <DivideLine type="thin" className={styleUtils.mt10} />
+
+      <Modal.Confirm
+        title="정말로 삭제하시겠습니까?"
+        show={confirmModal.show}
+        onClose={confirmModal.close}
+        onComplete={onDelete}
+      />
     </div>
   );
 }

@@ -6,10 +6,12 @@ import {
   Checkbox,
   CheckboxContainer,
   DefaultLayout,
+  Modal,
   PageHeader,
+  useModalConfirm,
 } from "../../components";
 import { styleUtils } from "../../styles";
-import { useCarts } from "../../store";
+import { useCarts, useCartsDelete } from "../../store";
 
 const convertIdsToBooleanMap = (
   allIds: number[],
@@ -24,9 +26,11 @@ const convertIdsToBooleanMap = (
   );
 
 export default function CartPage() {
-  const { carts } = useCarts();
+  const { carts, refetchCarts } = useCarts();
+  const { deleteCarts, deletedCarts } = useCartsDelete();
   const [quantityMap, setQuantityMap] = useState<Record<string, number>>({});
   const [checkedIds, setCheckedIds] = useState<number[]>([]);
+  const checkedDeleteConfirm = useModalConfirm(checkedIds.length > 0);
 
   const checkedMap = useMemo(
     () =>
@@ -80,6 +84,19 @@ export default function CartPage() {
     }));
   }, []);
 
+  const deleteCheckedCarts = useCallback(() => {
+    deleteCarts(checkedIds);
+    checkedDeleteConfirm.close();
+  }, [checkedDeleteConfirm, checkedIds, deleteCarts]);
+
+  const deleteCart = useCallback(
+    (id: number) => {
+      deleteCarts([id]);
+      checkedDeleteConfirm.close();
+    },
+    [checkedDeleteConfirm, deleteCarts]
+  );
+
   useEffect(() => {
     setQuantityMap(
       carts.reduce(
@@ -91,6 +108,16 @@ export default function CartPage() {
       )
     );
   }, [carts]);
+
+  useEffect(() => {
+    if (deletedCarts) {
+      refetchCarts();
+      const allIds = carts.map(({ id }) => id);
+      setCheckedIds((ids) =>
+        ids.filter((checkedId) => allIds.includes(checkedId))
+      );
+    }
+  }, [carts, deletedCarts, refetchCarts]);
 
   return (
     <DefaultLayout>
@@ -112,27 +139,42 @@ export default function CartPage() {
                   onChange={toggleAllChecked}
                   checked={allChecked}
                 />
-                <Button type="normal" size="mini">
+                <Button
+                  type="normal"
+                  size="mini"
+                  disabled={checkedIds.length === 0}
+                  onClick={checkedDeleteConfirm.open}
+                >
                   상품삭제
                 </Button>
+
+                <Modal.Confirm
+                  title="정말로 삭제하시겠습니까?"
+                  show={checkedDeleteConfirm.show}
+                  onClose={checkedDeleteConfirm.close}
+                  onComplete={deleteCheckedCarts}
+                />
               </div>
             }
             title={<>든든배송 상품({carts.length}개)</>}
           >
             {carts.map(({ id, product }) => (
-              <Cart.Item
-                key={id}
-                product={product}
-                quantity={quantityMap[id]}
-                checkbox={
-                  <Checkbox
-                    name={`cart-${id}`}
-                    onChange={() => toggleChecked(id)}
-                    checked={checkedMap[id]}
-                  />
-                }
-                onChangeQuantity={(quantity) => changeQuantity(id, quantity)}
-              />
+              <>
+                <Cart.Item
+                  key={id}
+                  product={product}
+                  quantity={quantityMap[id]}
+                  checkbox={
+                    <Checkbox
+                      name={`cart-${id}`}
+                      onChange={() => toggleChecked(id)}
+                      checked={checkedMap[id]}
+                    />
+                  }
+                  onChangeQuantity={(quantity) => changeQuantity(id, quantity)}
+                  onDelete={() => deleteCart(id)}
+                />
+              </>
             ))}
           </Cart.SectionLeft>
 

@@ -1,4 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes } from "react";
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  HTMLAttributes,
+  InputHTMLAttributes,
+} from "react";
 
 export type TNormalElementProps<Element> = DetailedHTMLProps<
   HTMLAttributes<Element>,
@@ -8,4 +13,9 @@ export type TNormalElementProps<Element> = DetailedHTMLProps<
 export type TInputElementProps<Element = HTMLInputElement> = DetailedHTMLProps<
   InputHTMLAttributes<Element>,
   Element
+>;
+
+export type TButtonElementProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
 >;

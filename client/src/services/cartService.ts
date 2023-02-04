@@ -22,4 +22,15 @@ export const cartService = {
 
     return Promise.resolve();
   },
+
+  deleteCarts(ids: number[]) {
+    const shoppingCartData = shoppingCartStorage.getData();
+
+    shoppingCartStorage.setData({
+      ...shoppingCartData,
+      carts: shoppingCartData.carts.filter(({ id }) => !ids.includes(id)),
+    });
+
+    return Promise.resolve();
+  },
 };
