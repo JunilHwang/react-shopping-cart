@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { CartPage, HomePage, OrderListPage } from "../pages";
+import { CartPage, HomePage, OrderListPage, OrderPage } from "../pages";
 
 const router = createBrowserRouter([
   {
@@ -16,15 +16,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/order",
-    element: <div>Order</div>,
+    element: <OrderPage />,
   },
   {
     path: "/order-list",
     element: <OrderListPage />,
   },
   {
-    path: "/orderDetail",
-    element: <div>OrderDetail</div>,
+    path: "/order-detail",
+    element: <div>order detail</div>,
   },
 ]);
 

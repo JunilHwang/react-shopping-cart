@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import cx from "classnames";
+import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
 import {
   Button,
   Cart,
@@ -11,7 +13,13 @@ import {
   useModalConfirm,
 } from "../../components";
 import { styleUtils } from "../../styles";
-import { useCarts, useCartsDelete } from "../../store";
+import {
+  cartCheckedIdsAtom,
+  orderDetailsAtom,
+  useCarts,
+  useCartsDelete,
+} from "../../store";
+import { cartsToOrderDetails } from "../../domain";
 
 const convertIdsToBooleanMap = (
   allIds: number[],
@@ -28,9 +36,12 @@ const convertIdsToBooleanMap = (
 export default function CartPage() {
   const { carts, refetchCarts } = useCarts();
   const { deleteCarts, deletedCarts } = useCartsDelete();
+  const [, setOrderDetails] = useAtom(orderDetailsAtom);
   const [quantityMap, setQuantityMap] = useState<Record<string, number>>({});
-  const [checkedIds, setCheckedIds] = useState<number[]>([]);
-  const checkedDeleteConfirm = useModalConfirm(checkedIds.length > 0);
+  const [checkedIds, setCheckedIds] = useAtom(cartCheckedIdsAtom);
+  const checkedDeleteConfirm = useModalConfirm();
+  const orderConfirm = useModalConfirm();
+  const navigate = useNavigate();
 
   const checkedMap = useMemo(
     () =>
@@ -62,15 +73,26 @@ export default function CartPage() {
     [checkedIds.length]
   );
 
-  const toggleChecked = useCallback((targetId: number) => {
-    setCheckedIds((ids) => {
-      if (ids.includes(targetId)) {
-        return ids.filter((id) => id !== targetId);
-      } else {
-        return [...ids, targetId];
-      }
-    });
-  }, []);
+  const totalQuantity = useMemo(
+    () =>
+      Object.keys(quantityMap)
+        .filter((id) => checkedMap[id])
+        .reduce((acc, id) => acc + quantityMap[id], 0),
+    [checkedMap, quantityMap]
+  );
+
+  const toggleChecked = useCallback(
+    (targetId: number) => {
+      setCheckedIds((ids) => {
+        if (ids.includes(targetId)) {
+          return ids.filter((id) => id !== targetId);
+        } else {
+          return [...ids, targetId];
+        }
+      });
+    },
+    [setCheckedIds]
+  );
 
   const toggleAllChecked = useCallback(() => {
     setCheckedIds(() => {
@@ -80,7 +102,7 @@ export default function CartPage() {
         return carts.map(({ id }) => id);
       }
     });
-  }, [allChecked, carts]);
+  }, [allChecked, carts, setCheckedIds]);
 
   const changeQuantity = useCallback((id: number, quantity: number) => {
     setQuantityMap((map) => ({
@@ -102,13 +124,15 @@ export default function CartPage() {
     [checkedDeleteConfirm, deleteCarts]
   );
 
-  const totalQuantity = useMemo(
-    () =>
-      Object.keys(quantityMap)
-        .filter((id) => checkedMap[id])
-        .reduce((acc, id) => acc + quantityMap[id], 0),
-    [checkedMap, quantityMap]
-  );
+  const orderSelectedCarts = useCallback(() => {
+    setOrderDetails(
+      cartsToOrderDetails(
+        carts.filter(({ id }) => checkedIds.includes(id)),
+        quantityMap
+      )
+    );
+    navigate("/order");
+  }, [carts, checkedIds, navigate, quantityMap, setOrderDetails]);
 
   useEffect(() => {
     setQuantityMap(
@@ -130,7 +154,7 @@ export default function CartPage() {
         ids.filter((checkedId) => allIds.includes(checkedId))
       );
     }
-  }, [carts, deletedCarts, refetchCarts]);
+  }, [carts, deletedCarts, refetchCarts, setCheckedIds]);
 
   return (
     <DefaultLayout>
@@ -172,22 +196,20 @@ export default function CartPage() {
             title={<>든든배송 상품({checkedIds.length}개)</>}
           >
             {carts.map(({ id, product }) => (
-              <>
-                <Cart.Item
-                  key={id}
-                  product={product}
-                  quantity={quantityMap[id]}
-                  checkbox={
-                    <Checkbox
-                      name={`cart-${id}`}
-                      onChange={() => toggleChecked(id)}
-                      checked={checkedMap[id]}
-                    />
-                  }
-                  onChangeQuantity={(quantity) => changeQuantity(id, quantity)}
-                  onDelete={() => deleteCart(id)}
-                />
-              </>
+              <Cart.Item
+                key={id}
+                product={product}
+                quantity={quantityMap[id]}
+                checkbox={
+                  <Checkbox
+                    name={`cart-${id}`}
+                    onChange={() => toggleChecked(id)}
+                    checked={checkedMap[id]}
+                  />
+                }
+                onChangeQuantity={(quantity) => changeQuantity(id, quantity)}
+                onDelete={() => deleteCart(id)}
+              />
             ))}
           </Cart.SectionLeft>
 
@@ -195,8 +217,15 @@ export default function CartPage() {
             title="결제예상금액"
             buttonLabel={<>주문하기({totalQuantity}개)</>}
             disabled={noneChecked}
+            onClickButton={orderConfirm.open}
           >
             <Cart.TotalPrice label="결제예상금액" value={totalPrice} />
+            <Modal.Confirm
+              title="정말로 주문하시겠습니까?"
+              show={orderConfirm.show}
+              onClose={orderConfirm.close}
+              onComplete={orderSelectedCarts}
+            />
           </Cart.SectionRight>
         </Cart.SectionWrapper>
       </Cart.Container>

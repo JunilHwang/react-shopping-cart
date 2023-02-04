@@ -9,6 +9,7 @@ interface IProps {
   title: ReactNode;
   buttonLabel: ReactNode;
   disabled?: boolean;
+  onClickButton: () => void;
 }
 
 export default function CartSectionRight({
@@ -16,6 +17,7 @@ export default function CartSectionRight({
   title,
   buttonLabel,
   disabled,
+  onClickButton,
 }: PropsWithChildren<IProps>) {
   return (
     <section className={styles.cartRightSection}>
@@ -39,6 +41,7 @@ export default function CartSectionRight({
             size="full"
             className={styleUtils.flexCenter}
             disabled={disabled}
+            onClick={onClickButton}
           >
             {buttonLabel}
           </Button>
