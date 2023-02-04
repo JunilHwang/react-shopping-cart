@@ -11,6 +11,7 @@ export default function Checkbox({
       {...props}
       type="checkbox"
       className={classnames(styles.checkbox, className)}
+      value={props.checked ? "true" : "false"}
     />
   );
 }

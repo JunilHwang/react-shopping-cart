@@ -4,21 +4,26 @@ import { TNormalElementProps } from "../../../types";
 import Checkbox from "./Checkbox";
 import styles from "./Checkbox.module.scss";
 
-interface IProps extends TNormalElementProps<HTMLDivElement> {
-  checkbox: ComponentProps<typeof Checkbox>;
+interface IProps extends ComponentProps<typeof Checkbox> {
   label: ReactNode;
+  containerProps?: TNormalElementProps<HTMLDivElement>;
 }
 
 export default function CheckboxContainer({
-  checkbox,
   label,
-  className = "",
+  containerProps,
   ...props
 }: IProps) {
   return (
-    <div {...props} className={classnames(styles.checkboxContainer, className)}>
-      <Checkbox {...checkbox} />
-      <label className={styles.checkboxLabel} htmlFor={checkbox.name}>
+    <div
+      {...containerProps}
+      className={classnames(
+        styles.checkboxContainer,
+        containerProps?.className
+      )}
+    >
+      <Checkbox {...props} />
+      <label className={styles.checkboxLabel} htmlFor={props.name}>
         {label}
       </label>
     </div>

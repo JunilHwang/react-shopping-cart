@@ -10,9 +10,16 @@ import styles from "./Cart.module.scss";
 interface IProps {
   checkbox?: ReactNode;
   product: IProduct;
+  quantity: number;
+  onChangeQuantity?: (quantity: number) => void;
 }
 
-export default function CartItem({ checkbox, product }: IProps) {
+export default function CartItem({
+  checkbox,
+  product,
+  quantity,
+  onChangeQuantity,
+}: IProps) {
   const checkboxIfExists = useMemo(
     () =>
       checkbox && (
@@ -50,8 +57,12 @@ export default function CartItem({ checkbox, product }: IProps) {
               defaultValue={CartQuantity.MIN}
               min={CartQuantity.MIN}
               max={CartQuantity.MAX}
+              onChange={onChangeQuantity}
             />
-            <Price className={styles.cartPrice} price={product.price} />
+            <Price
+              className={styles.cartPrice}
+              price={product.price * quantity}
+            />
           </div>
         </div>
       </div>
