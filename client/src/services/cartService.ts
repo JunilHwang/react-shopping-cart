@@ -23,6 +23,29 @@ export const cartService = {
     return Promise.resolve();
   },
 
+  addCartByProductId(productId: number): Promise<void> {
+    const shoppingCartData = shoppingCartStorage.getData();
+    const product = shoppingCartData.products.find(
+      (product) => product.id === productId
+    );
+
+    if (!product) {
+      return Promise.reject();
+    }
+
+    const cart: ICart = {
+      id: generateUniqId(),
+      product,
+    };
+
+    shoppingCartStorage.setData({
+      ...shoppingCartData,
+      carts: [...shoppingCartData.carts, cart],
+    });
+
+    return Promise.resolve();
+  },
+
   deleteCarts(ids: number[]) {
     const shoppingCartData = shoppingCartStorage.getData();
 

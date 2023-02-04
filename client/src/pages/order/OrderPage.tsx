@@ -1,4 +1,3 @@
-import { useAtom } from "jotai";
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,16 +8,11 @@ import {
   PageHeader,
   useModalConfirm,
 } from "../../components";
-import {
-  cartCheckedIdsAtom,
-  useCartsDelete,
-  useOrderAdd,
-  useOrderDetails,
-} from "../../store";
+import { useCartsDelete, useOrderAdd, useOrderDetails } from "../../store";
+import useResetCarts from "../../store/global-store/hooks/useResetCarts";
 
 export default function OrderPage() {
   const { orderDetails, totalQuantity, totalPrice } = useOrderDetails();
-  const [checkedIds] = useAtom(cartCheckedIdsAtom);
   const { addOrder, addedOrder } = useOrderAdd();
   const { deleteCarts } = useCartsDelete();
   const navigate = useNavigate();
@@ -29,9 +23,7 @@ export default function OrderPage() {
     addOrder(orderDetails);
   }, [addOrder, orderDetails]);
 
-  useEffect(() => {
-    deleteCarts(checkedIds);
-  }, [checkedIds, deleteCarts]);
+  useResetCarts(deleteCarts);
 
   useEffect(() => {
     if (addedOrder) {

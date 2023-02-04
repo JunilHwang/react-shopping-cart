@@ -1,8 +1,13 @@
 import classnames from "classnames";
+import { useCallback } from "react";
 import { styleUtils } from "../../styles";
 import { Button, PriceAndQuantity } from "../atoms";
 import { IOrderDetail } from "../../types";
 import styles from "./Order.module.scss";
+
+interface IProps extends IOrderDetail {
+  onClickCart?: (id: number) => void;
+}
 
 export default function OrderItem({
   id,
@@ -10,7 +15,12 @@ export default function OrderItem({
   name,
   price,
   quantity,
-}: IOrderDetail) {
+  onClickCart,
+}: IProps) {
+  const handleClickCart = useCallback(() => {
+    onClickCart?.(id);
+  }, [id, onClickCart]);
+
   return (
     <div className={styles.orderListItem} key={id}>
       <div
@@ -36,6 +46,7 @@ export default function OrderItem({
       </div>
       <Button
         className={classnames(styleUtils.flexCenter, styleUtils.alignSelfStart)}
+        onClick={handleClickCart}
       >
         장바구니
       </Button>

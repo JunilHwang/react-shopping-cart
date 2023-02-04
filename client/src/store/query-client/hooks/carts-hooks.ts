@@ -25,6 +25,18 @@ export function useCartAdd() {
   };
 }
 
+export function useCartAddByProductId() {
+  const { mutate: addCart, isSuccess: addedCart } = useMutation(
+    QUERY_KEY,
+    cartService.addCartByProductId
+  );
+
+  return {
+    addCart,
+    addedCart,
+  };
+}
+
 export function useCartsDelete() {
   const { mutate: deleteCarts, isSuccess: deletedCarts } = useMutation(
     QUERY_KEY,
