@@ -1,16 +1,25 @@
-import { apiClient } from "../clients";
 import { ICart, IProduct } from "../types";
-
-const BASE_URI = "/carts";
+import { shoppingCartStorage } from "../storages";
+import { generateUniqId } from "./utils";
 
 export const cartService = {
   fetchCarts(): Promise<ICart[]> {
-    return apiClient.get<ICart[]>(BASE_URI).then((response) => response.data);
+    const shoppingCartData = shoppingCartStorage.getData();
+    return Promise.resolve(shoppingCartData.carts);
   },
 
   addCart(product: IProduct): Promise<void> {
-    return apiClient
-      .post(BASE_URI, { product })
-      .then((response) => response.data);
+    const shoppingCartData = shoppingCartStorage.getData();
+    const cart: ICart = {
+      id: generateUniqId(),
+      product,
+    };
+
+    shoppingCartStorage.setData({
+      ...shoppingCartData,
+      carts: [...shoppingCartData.carts, cart],
+    });
+
+    return Promise.resolve();
   },
 };
