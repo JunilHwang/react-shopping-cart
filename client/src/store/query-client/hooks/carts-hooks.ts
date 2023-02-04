@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { cartService } from "../../services";
+import { cartService } from "../../../services";
 
 const QUERY_KEY = "carts";
 

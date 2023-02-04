@@ -58,7 +58,7 @@ export default function CartItem({
           >
             <IconButton icon={<IconTrash />} onClick={confirmModal.open} />
             <NumberInput
-              defaultValue={CartQuantity.MIN}
+              defaultValue={quantity}
               min={CartQuantity.MIN}
               max={CartQuantity.MAX}
               onChange={onChangeQuantity}

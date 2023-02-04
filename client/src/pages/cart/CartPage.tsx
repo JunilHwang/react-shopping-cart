@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import cx from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
@@ -15,11 +15,11 @@ import {
 import { styleUtils } from "../../styles";
 import {
   cartCheckedIdsAtom,
-  orderDetailsAtom,
+  useCartQuantity,
   useCarts,
   useCartsDelete,
+  useOrderDetails,
 } from "../../store";
-import { cartsToOrderDetails } from "../../domain";
 
 const convertIdsToBooleanMap = (
   allIds: number[],
@@ -36,9 +36,9 @@ const convertIdsToBooleanMap = (
 export default function CartPage() {
   const { carts, refetchCarts } = useCarts();
   const { deleteCarts, deletedCarts } = useCartsDelete();
-  const [, setOrderDetails] = useAtom(orderDetailsAtom);
-  const [quantityMap, setQuantityMap] = useState<Record<string, number>>({});
+  const [quantityMap, setQuantityMap] = useCartQuantity(carts);
   const [checkedIds, setCheckedIds] = useAtom(cartCheckedIdsAtom);
+  const setOrderDetails = useOrderDetails(checkedIds, quantityMap);
   const checkedDeleteConfirm = useModalConfirm();
   const orderConfirm = useModalConfirm();
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function CartPage() {
   );
 
   const allChecked = useMemo(
-    () => checkedIds.length === carts.length,
+    () => carts.length > 0 && checkedIds.length === carts.length,
     [carts.length, checkedIds.length]
   );
 
@@ -104,12 +104,15 @@ export default function CartPage() {
     });
   }, [allChecked, carts, setCheckedIds]);
 
-  const changeQuantity = useCallback((id: number, quantity: number) => {
-    setQuantityMap((map) => ({
-      ...map,
-      [id]: quantity,
-    }));
-  }, []);
+  const changeQuantity = useCallback(
+    (id: number, quantity: number) => {
+      setQuantityMap((map) => ({
+        ...map,
+        [id]: quantity,
+      }));
+    },
+    [setQuantityMap]
+  );
 
   const deleteCheckedCarts = useCallback(() => {
     deleteCarts(checkedIds);
@@ -125,26 +128,9 @@ export default function CartPage() {
   );
 
   const orderSelectedCarts = useCallback(() => {
-    setOrderDetails(
-      cartsToOrderDetails(
-        carts.filter(({ id }) => checkedIds.includes(id)),
-        quantityMap
-      )
-    );
+    setOrderDetails(carts);
     navigate("/order");
-  }, [carts, checkedIds, navigate, quantityMap, setOrderDetails]);
-
-  useEffect(() => {
-    setQuantityMap(
-      carts.reduce(
-        (acc, { id }) => ({
-          ...acc,
-          [id]: 1,
-        }),
-        {}
-      )
-    );
-  }, [carts]);
+  }, [carts, navigate, setOrderDetails]);
 
   useEffect(() => {
     if (deletedCarts) {

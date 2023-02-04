@@ -1,3 +1,2 @@
-export * from "./queryClient";
-export * from "./hooks";
-export * from "./store";
+export * from "./query-client";
+export * from "./global-store";
