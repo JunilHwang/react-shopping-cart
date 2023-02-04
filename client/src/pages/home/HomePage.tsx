@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { DefaultLayout, Product } from "../../components";
 import { useInfiniteScroll, usePagination } from "../../hooks";
 import { useCartsActions, useProducts } from "../../store";
@@ -7,7 +8,8 @@ const PAGE_SIZE = 12;
 
 export default function HomePage() {
   const { isLoading, products } = useProducts();
-  const { addCart } = useCartsActions();
+  const { addCart, cartAdded } = useCartsActions();
+  const navigate = useNavigate();
 
   const { pageItems, goToNextPage } = usePagination({
     items: products,
@@ -24,6 +26,12 @@ export default function HomePage() {
     },
     [addCart, pageItems]
   );
+
+  useEffect(() => {
+    if (cartAdded) {
+      navigate("/cart");
+    }
+  }, [cartAdded, navigate]);
 
   return (
     <DefaultLayout>

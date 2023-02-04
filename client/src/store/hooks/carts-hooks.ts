@@ -12,9 +12,13 @@ export function useCarts() {
 }
 
 export function useCartsActions() {
-  const { mutate: addCart } = useMutation(QUERY_KEY, cartService.addCart);
+  const { mutate: addCart, isSuccess: cartAdded } = useMutation(
+    QUERY_KEY,
+    cartService.addCart
+  );
 
   return {
     addCart,
+    cartAdded,
   };
 }

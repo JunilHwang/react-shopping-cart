@@ -4,6 +4,7 @@ import { styleUtils } from "../../styles";
 import { DivideLine, NumberInput, Price } from "../atoms";
 import { IProduct } from "../../types";
 import { IconTrash } from "../../assets/svgs";
+import { CartQuantity } from "../../domain";
 import styles from "./Cart.module.scss";
 
 interface IProps {
@@ -45,7 +46,11 @@ export default function CartItem({ checkbox, product }: IProps) {
             )}
           >
             <IconTrash />
-            <NumberInput defaultValue={1} />
+            <NumberInput
+              defaultValue={CartQuantity.MIN}
+              min={CartQuantity.MIN}
+              max={CartQuantity.MAX}
+            />
             <Price className={styles.cartPrice} price={product.price} />
           </div>
         </div>
